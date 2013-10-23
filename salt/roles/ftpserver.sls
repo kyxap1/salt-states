@@ -1,0 +1,2 @@
+include:
+  - pkg.mysql-server

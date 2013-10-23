@@ -1,0 +1,3 @@
+portmaster:
+  pkg:
+    - installed

@@ -1,0 +1,3 @@
+gsed:
+  pkg:
+    - installed

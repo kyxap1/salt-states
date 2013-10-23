@@ -1,0 +1,4 @@
+mc:
+  pkg:
+    - installed
+

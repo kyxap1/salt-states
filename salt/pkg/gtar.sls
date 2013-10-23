@@ -1,0 +1,3 @@
+gtar:
+  pkg:
+    - installed

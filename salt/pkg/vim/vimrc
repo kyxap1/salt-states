@@ -1,0 +1,223 @@
+" No compatible.  You want to use Vim, not vi
+set nocp
+set background=dark
+" We don't wrap lines, they become a LONG horizontal one (useful)  
+"set nowrap 
+set wrap
+" Set background to dark to have nicer syntax highlighting.
+"set background=dark
+
+" We keep 3 lines when scrolling
+set scrolloff=3
+
+" We show vertical and horizontal position
+set ruler
+" Incremental search
+set is
+
+" Ignore case when searching
+set ic
+
+" Show matching ()'s []'s {}'s
+set sm
+
+" Tabs are 4 spaces long
+set tabstop=4
+
+" When autoindent does a tab, it's 4 spaces long
+set shiftwidth=4
+
+" No need to save to make a :next :previous, etc.
+set aw
+" No idea what it's for...
+set backspace=2
+
+" No bell sound
+"set errorbells
+"set visualbell
+
+" Put title in title bar
+set title
+
+" Smoother changes
+set ttyfast
+
+" Tabs are converted to space characters
+set et
+
+" Remove autocommands just in case
+autocmd!
+
+"----- only turn on syntax highlighting of there are more than one color
+syntax on
+"----- don't don't out in insert mode
+set noinsertmode
+"----- show the command in the status line
+set showcmd
+"----- you need digraphs for uumlauts
+" set digraph
+
+set joinspaces
+
+" yes.  allow magic patterns in searches
+set magic
+
+" we use bash
+set shell=bash
+
+"set autowrite
+
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+
+set nobackup
+
+"esckeys:    allow usage of cursor keys within insert mode
+"       You will find this useful when working, eg, on SunOS.
+set   esckeys
+
+"       formatoptions:  Options for the "text format" command ("gq")
+"                       I need all those options (but 'o')!
+  "set  formatoptions=cq
+  set  formatoptions-=ro
+  set  formatoptions=cq
+
+"       hidden:  Allow "hidden" buffers.  A must-have!
+  set   hidden
+"
+"
+"       hlsearch :  highlight search - show the current search pattern
+"       This is a nice feature sometimes - but it sure can get in the
+"       way sometimes when you edit.
+  set hlsearch
+"
+"       modeline:    ...
+"       Allow the last line to be a modeline - useful when
+"       the last line in sig gives the preferred textwidth for replies.
+  set   modeline
+  set   modelines=1
+"
+"       report: show a report when N lines were changed.
+"               report=0 thus means "show all changes"!
+  set   report=0
+
+  set   showcmd
+"
+"       showmatch:   Show the matching bracket for the last ')'?
+  set   showmatch
+"
+"       showmode:    Show the current mode?  YEEEEEEEEESSSSSSSSSSS!
+  set   showmode
+"
+"       startofline:  no:  do not jump to first character with page
+"       commands, ie keep the cursor in the current column.
+  set nostartofline
+"
+"       splitbelow:  Create new window below current one.
+  set   splitbelow
+"
+"       ttyscroll:      turn off scrolling -> faster!
+"  set   ttyscroll=0
+"
+"       whichwrap:
+"       Allow jump commands for left/right motion to wrap to previous/next
+"       line when cursor is on first/last character in the line:
+  set   whichwrap=<,>,h,l,[,]
+"
+"       wildchar  the char used for "expansion" on the command line
+"                 default value is "<C-E>" but I prefer the tab key:
+  set   wildchar=<TAB>
+"
+"       wrapmargin:
+  set   wrapmargin=1
+"
+"       writebackup:
+  set nowritebackup
+
+" When I let Vim write the current buffer I frequently mistype the
+" command ":w" as ":W" - so I have to remap it to correct this typo:
+  nmap :W :w
+"
+" Are you used to the Unix commands "alias" and "which"?
+" I sometimes use these to look up my abbreviations and mappings.
+" So I need them available on the command line:
+  map :alias map
+  map :which map
+"
+" go in help
+map   \\   <C-]>
+
+
+" ===================================================================
+" General Editing - link to program "screen"
+" ===================================================================
+"
+"       ,Et = edit temporary file of "screen" program
+  map   ,Et :e /tmp/vim.swp
+"
+" ===================================================================
+" General Editing - link to program "screen"
+" ===================================================================
+"
+"       ,Et = edit temporary file of "screen" program
+  map   ,Et :e /tmp/screen-exchange
+"
+
+" QUIT
+map    <F10>   :q<CR>
+imap   <F10>   <Esc>:q<CR>
+cmap   <F10>   <Esc><Esc>:q<CR>
+
+cmap    Q   q
+cmap    W   w
+
+" MENU
+source $VIMRUNTIME/menu.vim
+set wildmenu
+set cpo-=<
+set wcm=<C-Z>
+map <F9> :emenu <C-Z>
+
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+  
+augroup END
+  
+filetype plugin indent on
+set backspace=indent,eol,start
+
+" Tabs are 2 spaces long
+set tabstop=2
+"
+" " When autoindent does a tab, it's 4 spaces long
+set shiftwidth=2
+
+function SetEncoding(f)
+    let e = system('enca -Pe "' . a:f . '"')
+    let e = substitute(e, '/.*', '', '')
+    if e =~ 'unknown' || e =~ 'ASCII' || e =~ 'enca' || e =~ 'TeX'
+        execute("set encoding=utf8")
+        execute("set fileencodings=koi8-r,cp1251,cp866,utf-8,ucs-bom,ascii")
+    else
+        execute("set encoding=" . e)
+        execute("set fileencodings=" . e)
+    endif
+endfunction
+
+source $VIMRUNTIME/menu.vim
+menu Options.Encoding.koi8-r :e ++enc=koi8-r<CR>;:set encoding=koi8-r<CR>:set fileencodings=koi8-r<CR>;
+menu Options.Encoding.cp1251 :e ++enc=cp1251<CR>:set encoding=cp1251<CR>:set fileencodings=cp1251<CR>
+menu Options.Encoding.cp866 :e ++enc=cp866<CR>:set encoding=cp866<CR>:set fileencodings=cp866<CR>
+menu Options.Encoding.utf-8 :e ++enc=utf-8<CR>:set encoding=utf-8<CR>:set fileencodings=utf-8<CR>
+menu Options.Encoding.ucs-bom :e ++enc=ucs-bom<CR>:set encoding=ucs-bom<CR>:set fileencodings=ucs-bom<CR>
+
+if executable("enca")
+    autocmd BufReadPre * call SetEncoding(expand('<afile>'))
+endif
+
+set statusline=%F\ (%Y,%{&encoding},%{&ff})%=%m%R\ %3p%%,\ %L\ lines,\ 0x%2B,\ (%l:%c)
+
+set termencoding=utf8
