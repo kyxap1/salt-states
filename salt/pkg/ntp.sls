@@ -3,12 +3,10 @@ ntp:
     pkg:
       - installed
     {% endif %}
-  service.running:
+    service.running:
     {% if
-      grains['os'] == 'FreeBSD' or
-      grains['os'] == 'RedHat' or
-      grains['os'] == 'CentOS' or
-      grains['os'] == 'Fedora'
+      grains['os_family'] == 'FreeBSD' or
+      grains['os_family'] == 'RedHat'
     %}
     - name: ntpd
     {% endif %}

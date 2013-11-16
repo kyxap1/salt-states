@@ -5,6 +5,7 @@ include:
   - pkg.atop
   - pkg.iotop
   - pkg.sysstat
+  - pkg.pciutils
   {% elif grains['kernel'] == 'FreeBSD' %}
   - pkg.portmaster
   - pkg.cvsup-without-gui
