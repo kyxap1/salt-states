@@ -1,0 +1,3 @@
+alien:
+  pkg:
+    - installed
