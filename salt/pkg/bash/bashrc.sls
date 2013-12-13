@@ -20,7 +20,7 @@ create_bashrc:
       - # FreeBSD settings
       - if [ `echo $0` == "-bash" ]; then
       -   [[ -x `which gdircolors` ]] && eval "$(gdircolors -b)" || export LSCOLORS=ExGxFxdxCxDxDxhbadExEx
-      -   [[ -x `which gls` ]] && alias ls='gls -F --color=auto' || alias ls='ls -G'
+      -   [[ -x `which gls` ]] && alias ls='gls --color=auto' || alias ls='ls -G'
       -   [[ -x `which gsed` ]] && alias sed='gsed'
       - fi
       {% else %}
