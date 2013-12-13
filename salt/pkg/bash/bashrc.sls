@@ -17,12 +17,9 @@ create_bashrc:
       {% if grains['os_family'] == 'FreeBSD' %}
       - export PAGER='less -R'
       - export EDITOR=vim
-      - # FreeBSD settings
-      - if [ `echo $0` == "-bash" ]; then
-      -   [[ -x `which gdircolors` ]] && eval "$(gdircolors -b)" || export LSCOLORS=ExGxFxdxCxDxDxhbadExEx
-      -   [[ -x `which gls` ]] && alias ls='gls --color=auto' || alias ls='ls -G'
-      -   [[ -x `which gsed` ]] && alias sed='gsed'
-      - fi
+      - [[ -x `which gdircolors` ]] && eval "$(gdircolors -b)" || export LSCOLORS=ExGxFxdxCxDxDxhbadExEx
+      - [[ -x `which gls` ]] && alias ls='gls --color=auto' || alias ls='ls -G'
+      - [[ -x `which gsed` ]] && alias sed='gsed'
       {% else %}
       - alias ls='ls --color=auto'
       - if ! shopt -oq posix; then if [ -f /usr/share/bash-completion/bash_completion ]; then source /usr/share/bash-completion/bash_completion; elif [ -f /etc/bash_completion ]; then source /etc/bash_completion; fi; fi
